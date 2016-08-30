@@ -512,9 +512,9 @@ func (n *pathInode) Link(name string, existingFsnode nodefs.Node, context *fuse.
 func (n *pathInode) Create(name string, flags uint32, mode uint32, context *fuse.Context) (nodefs.File, *nodefs.Inode, fuse.Status) {
 	var child *nodefs.Inode
 	fullPath := filepath.Join(n.GetPath(), name)
-	file, code := n.fs.Create(fullPath, flags, mode, context)
+	file, code, newPath := n.fs.CreateWithNewPath(fullPath, flags, mode, context)
 	if code.Ok() {
-		pNode := n.createChild(name, false)
+		pNode := n.createChild(newPath, false)
 		child = pNode.Inode()
 	}
 	return file, child, code
