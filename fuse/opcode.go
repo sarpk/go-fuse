@@ -193,7 +193,7 @@ func doGetXAttr(server *Server, req *request) {
 		out := (*GetXAttrOut)(req.outData)
 		switch req.inHeader.Opcode {
 		case _OP_GETXATTR:
-			// TODO(hanwen): double check this. For getxattr, input.Size
+			// TODO(sarpk): double check this. For getxattr, input.Size
 			// field refers to the size of the attribute, so it usually
 			// is not 0.
 			sz, code := server.fileSystem.GetXAttrSize(req.inHeader, req.filenames[0])

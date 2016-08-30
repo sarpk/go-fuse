@@ -11,9 +11,9 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/hanwen/go-fuse/fuse"
-	"github.com/hanwen/go-fuse/fuse/nodefs"
-	"github.com/hanwen/go-fuse/internal/testutil"
+	"github.com/sarpk/go-fuse/fuse"
+	"github.com/sarpk/go-fuse/fuse/nodefs"
+	"github.com/sarpk/go-fuse/internal/testutil"
 )
 
 func testZipFile() string {

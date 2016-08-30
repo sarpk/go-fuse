@@ -20,7 +20,7 @@ func openFUSEDevice() (*os.File, error) {
 		return nil, err
 	}
 	if len(fs) == 0 {
-		// TODO(hanwen): run the load_osxfuse command.
+		// TODO(sarpk): run the load_osxfuse command.
 		return nil, fmt.Errorf("no FUSE devices found")
 	}
 	for _, fn := range fs {

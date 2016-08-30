@@ -7,8 +7,8 @@ package pathfs
 import (
 	"time"
 
-	"github.com/hanwen/go-fuse/fuse"
-	"github.com/hanwen/go-fuse/fuse/nodefs"
+	"github.com/sarpk/go-fuse/fuse"
+	"github.com/sarpk/go-fuse/fuse/nodefs"
 )
 
 // A filesystem API that uses paths rather than inodes.  A minimal

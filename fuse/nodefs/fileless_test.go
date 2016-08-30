@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/hanwen/go-fuse/fuse"
+	"github.com/sarpk/go-fuse/fuse"
 )
 
 type nodeReadNode struct {

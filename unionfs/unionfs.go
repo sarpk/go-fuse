@@ -16,9 +16,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/hanwen/go-fuse/fuse"
-	"github.com/hanwen/go-fuse/fuse/nodefs"
-	"github.com/hanwen/go-fuse/fuse/pathfs"
+	"github.com/sarpk/go-fuse/fuse"
+	"github.com/sarpk/go-fuse/fuse/nodefs"
+	"github.com/sarpk/go-fuse/fuse/pathfs"
 )
 
 func filePathHash(path string) string {
@@ -766,7 +766,7 @@ func (fs *unionFS) OpenDir(directory string, context *fuse.Context) (stream []fu
 
 	results := entries[0]
 
-	// TODO(hanwen): should we do anything with the return
+	// TODO(sarpk): should we do anything with the return
 	// statuses?
 	for i, m := range entries {
 		if statuses[i] != fuse.OK {
