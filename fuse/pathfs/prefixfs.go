@@ -103,6 +103,10 @@ func (fs *prefixFileSystem) Create(name string, flags uint32, mode uint32, conte
 	return fs.FileSystem.Create(fs.prefixed(name), flags, mode, context)
 }
 
+func (fs *prefixFileSystem) CreateWithNewPath(name string, flags uint32, mode uint32, context *fuse.Context) (file nodefs.File, code fuse.Status, newPath string) {
+	return fs.FileSystem.CreateWithNewPath(fs.prefixed(name), flags, mode, context)
+}
+
 func (fs *prefixFileSystem) Utimens(name string, Atime *time.Time, Mtime *time.Time, context *fuse.Context) (code fuse.Status) {
 	return fs.FileSystem.Utimens(fs.prefixed(name), Atime, Mtime, context)
 }

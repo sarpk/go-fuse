@@ -109,6 +109,10 @@ func (fs *defaultFileSystem) Create(name string, flags uint32, mode uint32, cont
 	return nil, fuse.ENOSYS
 }
 
+func (fs *defaultFileSystem) CreateWithNewPath(name string, flags uint32, mode uint32, context *fuse.Context) (file nodefs.File, code fuse.Status, newName string) {
+	return nil, fuse.ENOSYS, ""
+}
+
 func (fs *defaultFileSystem) Utimens(name string, Atime *time.Time, Mtime *time.Time, context *fuse.Context) (code fuse.Status) {
 	return fuse.ENOSYS
 }

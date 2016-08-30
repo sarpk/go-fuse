@@ -64,6 +64,7 @@ type FileSystem interface {
 	// should be updated too.
 	Open(name string, flags uint32, context *fuse.Context) (file nodefs.File, code fuse.Status)
 	Create(name string, flags uint32, mode uint32, context *fuse.Context) (file nodefs.File, code fuse.Status)
+	CreateWithNewPath(name string, flags uint32, mode uint32, context *fuse.Context) (file nodefs.File, code fuse.Status, newName string)
 
 	// Directory handling
 	OpenDir(name string, context *fuse.Context) (stream []fuse.DirEntry, code fuse.Status)

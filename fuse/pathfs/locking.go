@@ -141,6 +141,14 @@ func (fs *lockingFileSystem) Create(name string, flags uint32, mode uint32, cont
 	return file, code
 }
 
+func (fs *lockingFileSystem) CreateWithNewPath(name string, flags uint32, mode uint32, context *fuse.Context) (file nodefs.File, code fuse.Status, newPath string) {
+	defer fs.locked()()
+	file, code, newPath = fs.FS.CreateWithNewPath(name, flags, mode, context)
+
+	file = nodefs.NewLockingFile(&fs.lock, file)
+	return file, code, newPath
+}
+
 func (fs *lockingFileSystem) Utimens(name string, Atime *time.Time, Mtime *time.Time, context *fuse.Context) (code fuse.Status) {
 	defer fs.locked()()
 	return fs.FS.Utimens(name, Atime, Mtime, context)
