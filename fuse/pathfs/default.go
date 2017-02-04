@@ -27,6 +27,10 @@ func (fs *defaultFileSystem) GetAttr(name string, context *fuse.Context) (*fuse.
 	return nil, fuse.ENOSYS
 }
 
+func (fs *defaultFileSystem) GetAttrWithPath(path, fileName string, context *fuse.Context) (*fuse.Attr, fuse.Status, string) {
+	return nil, fuse.ENOSYS, ""
+}
+
 func (fs *defaultFileSystem) GetXAttr(name string, attr string, context *fuse.Context) ([]byte, fuse.Status) {
 	return nil, fuse.ENOATTR
 }
@@ -68,6 +72,10 @@ func (fs *defaultFileSystem) Symlink(value string, linkName string, context *fus
 }
 
 func (fs *defaultFileSystem) Rename(oldName string, newName string, context *fuse.Context) (code fuse.Status) {
+	return fuse.ENOSYS
+}
+
+func (fs *defaultFileSystem) RenameWithNewPath(oldName string, newPath, newName string, context *fuse.Context) (code fuse.Status) {
 	return fuse.ENOSYS
 }
 

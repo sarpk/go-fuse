@@ -466,8 +466,7 @@ func (n *pathInode) Symlink(name string, content string, context *fuse.Context) 
 func (n *pathInode) Rename(oldName string, newParent nodefs.Node, newName string, context *fuse.Context) (code fuse.Status) {
 	p := newParent.(*pathInode)
 	oldPath := filepath.Join(n.GetPath(), oldName)
-	newPath := filepath.Join(p.GetPath(), newName)
-	code = n.fs.Rename(oldPath, newPath, context)
+	code = n.fs.RenameWithNewPath(oldPath, p.GetPath(), newName, context)
 	if code.Ok() {
 		// The rename may have overwritten another file, remove it from the tree
 		p.Inode().RmChild(newName)
@@ -544,8 +543,7 @@ func (n *pathInode) Open(flags uint32, context *fuse.Context) (file nodefs.File,
 }
 
 func (n *pathInode) Lookup(out *fuse.Attr, name string, context *fuse.Context) (node *nodefs.Inode, code fuse.Status) {
-	fullPath := filepath.Join(n.GetPath(), name)
-	fi, code := n.fs.GetAttr(fullPath, context)
+	fi, code, fullPath := n.fs.GetAttrWithPath(n.GetPath(), name, context)
 	if code.Ok() {
 		node = n.findChild(fi, name, fullPath).Inode()
 		*out = *fi

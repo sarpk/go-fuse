@@ -35,6 +35,10 @@ func (fs *prefixFileSystem) GetAttr(name string, context *fuse.Context) (*fuse.A
 	return fs.FileSystem.GetAttr(fs.prefixed(name), context)
 }
 
+func (fs *prefixFileSystem) GetAttrWithPath(path, fileName string, context *fuse.Context) (*fuse.Attr, fuse.Status, string) {
+	return fs.FileSystem.GetAttrWithPath(fs.prefixed(path), fileName, context)
+}
+
 func (fs *prefixFileSystem) Readlink(name string, context *fuse.Context) (string, fuse.Status) {
 	return fs.FileSystem.Readlink(fs.prefixed(name), context)
 }
@@ -61,6 +65,10 @@ func (fs *prefixFileSystem) Symlink(value string, linkName string, context *fuse
 
 func (fs *prefixFileSystem) Rename(oldName string, newName string, context *fuse.Context) (code fuse.Status) {
 	return fs.FileSystem.Rename(fs.prefixed(oldName), fs.prefixed(newName), context)
+}
+
+func (fs *prefixFileSystem) RenameWithNewPath(oldName string, newPath, newName string, context *fuse.Context) (code fuse.Status) {
+	return fs.FileSystem.RenameWithNewPath(fs.prefixed(oldName), fs.prefixed(newPath), fs.prefixed(newName), context)
 }
 
 func (fs *prefixFileSystem) Link(oldName string, newName string, context *fuse.Context) (code fuse.Status) {

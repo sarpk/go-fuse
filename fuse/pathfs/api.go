@@ -32,6 +32,7 @@ type FileSystem interface {
 	// return consistent non-zero FileInfo.Ino data.  Using
 	// hardlinks incurs a performance hit.
 	GetAttr(name string, context *fuse.Context) (*fuse.Attr, fuse.Status)
+	GetAttrWithPath(path, fileName string, context *fuse.Context) (*fuse.Attr, fuse.Status, string)
 
 	// These should update the file's ctime too.
 	Chmod(name string, mode uint32, context *fuse.Context) (code fuse.Status)
@@ -47,6 +48,7 @@ type FileSystem interface {
 	Mkdir(name string, mode uint32, context *fuse.Context) fuse.Status
 	Mknod(name string, mode uint32, dev uint32, context *fuse.Context) fuse.Status
 	Rename(oldName string, newName string, context *fuse.Context) (code fuse.Status)
+	RenameWithNewPath(oldName string, newPath, newName string, context *fuse.Context) (code fuse.Status)
 	Rmdir(name string, context *fuse.Context) (code fuse.Status)
 	Unlink(name string, context *fuse.Context) (code fuse.Status)
 

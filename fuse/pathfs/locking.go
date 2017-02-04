@@ -52,6 +52,11 @@ func (fs *lockingFileSystem) GetAttr(name string, context *fuse.Context) (*fuse.
 	return fs.FS.GetAttr(name, context)
 }
 
+func (fs *lockingFileSystem) GetAttrWithPath(path, fileName string, context *fuse.Context) (*fuse.Attr, fuse.Status, string) {
+	defer fs.locked()()
+	return fs.FS.GetAttrWithPath(path, fileName, context)
+}
+
 func (fs *lockingFileSystem) Readlink(name string, context *fuse.Context) (string, fuse.Status) {
 	defer fs.locked()()
 	return fs.FS.Readlink(name, context)
@@ -85,6 +90,11 @@ func (fs *lockingFileSystem) Symlink(value string, linkName string, context *fus
 func (fs *lockingFileSystem) Rename(oldName string, newName string, context *fuse.Context) (code fuse.Status) {
 	defer fs.locked()()
 	return fs.FS.Rename(oldName, newName, context)
+}
+
+func (fs *lockingFileSystem) RenameWithNewPath(oldName string, newPath, newName string, context *fuse.Context) (code fuse.Status) {
+	defer fs.locked()()
+	return fs.FS.RenameWithNewPath(oldName, newPath, newName, context)
 }
 
 func (fs *lockingFileSystem) Link(oldName string, newName string, context *fuse.Context) (code fuse.Status) {
